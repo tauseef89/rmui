@@ -1,9 +1,19 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
-export default function Notes() {
+export default function Blogs() {
+  const [blogs, setBlogs] = useState([]);
+
+  useEffect(() => {
+    fetch('http://localhost:3004/blogs')
+      .then(res => res.json())
+      .then(data => setBlogs(data))
+  }, [])
+
   return (
     <div>
-      Blogs page
+      {blogs.map(blog => (
+        <p key={blog.id}>{ blog.title }</p>
+      ))}
     </div>
   )
 }
