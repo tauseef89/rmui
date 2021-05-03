@@ -35,14 +35,6 @@ const useStyles = makeStyles((theme) => {
       title: {
         padding: theme.spacing(2),
       },
-      appBar: {
-        width: `calc(100% - ${drawerWidth}px)`,
-        marginLeft: drawerWidth,
-      },
-      welcome: {
-        flexGrow: 1
-      },
-      toolbar: theme.mixins.toolbar
     }
   })
 
@@ -67,19 +59,7 @@ export default function Layout({ children }) {
   return (
     <div className={classes.root}>
       {/* app bar */}
-      <AppBar 
-        position="fixed" 
-        className={classes.appBar}
-        elevation={0}
-        color="primary"
-      >
-        <Toolbar>
-          <Typography className={classes.welcome}>
-            Welcome
-          </Typography>
-          <Typography>User</Typography>
-        </Toolbar>
-      </AppBar>
+      
 
       {/* side drawer */}
       <Drawer
@@ -113,7 +93,6 @@ export default function Layout({ children }) {
 
       {/* main content */}
       <div className={classes.page}>
-      <div className={classes.toolbar}></div>
         { children }
       </div>
     </div>
