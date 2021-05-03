@@ -8,27 +8,43 @@ import ListItem from '@material-ui/core/ListItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
 import { AddCircleOutlineOutlined, SubjectOutlined } from '@material-ui/icons'
+import AppBar from '@material-ui/core/AppBar'
+import Toolbar from '@material-ui/core/Toolbar'
 
 const drawerWidth = 240
 
-const useStyles = makeStyles({
-  page: {
-    background: '#f9f9f9',
-    width: '100%',
-  },
-  root: {
-    display: 'flex',
-  },
-  drawer: {
-    width: drawerWidth,
-  },
-  drawerPaper: {
-    width: drawerWidth,
-  },
-  active: {
-    background: '#f4f4f4'
-  },
-})
+const useStyles = makeStyles((theme) => {
+    return {
+      page: {
+        background: '#f9f9f9',
+        width: '100%',
+        padding: theme.spacing(3),
+      },
+      root: {
+        display: 'flex',
+      },
+      drawer: {
+        width: drawerWidth,
+      },
+      drawerPaper: {
+        width: drawerWidth,
+      },
+      active: {
+        background: '#f4f4f4'
+      },
+      title: {
+        padding: theme.spacing(2),
+      },
+      appBar: {
+        width: `calc(100% - ${drawerWidth}px)`,
+        marginLeft: drawerWidth,
+      },
+      welcome: {
+        flexGrow: 1
+      },
+      toolbar: theme.mixins.toolbar
+    }
+  })
 
 export default function Layout({ children }) {
   const classes = useStyles()
@@ -51,6 +67,19 @@ export default function Layout({ children }) {
   return (
     <div className={classes.root}>
       {/* app bar */}
+      <AppBar 
+        position="fixed" 
+        className={classes.appBar}
+        elevation={0}
+        color="primary"
+      >
+        <Toolbar>
+          <Typography className={classes.welcome}>
+            Welcome
+          </Typography>
+          <Typography>User</Typography>
+        </Toolbar>
+      </AppBar>
 
       {/* side drawer */}
       <Drawer
@@ -84,6 +113,7 @@ export default function Layout({ children }) {
 
       {/* main content */}
       <div className={classes.page}>
+      <div className={classes.toolbar}></div>
         { children }
       </div>
     </div>
