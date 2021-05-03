@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Container from '@material-ui/core/Container'
 import Grid from '@material-ui/core/Grid'
+import Masonry from 'react-masonry-css'
 import BlogCard from '../comp/BlogCard'
 
 export default function Blogs() {
@@ -20,15 +21,24 @@ export default function Blogs() {
     setBlogs(newBlogs)
   }
 
+  const breakpoints = {
+    default: 3,
+    1100: 2,
+    700: 1
+  };
+  
   return (
     <Container>
-      <Grid container spacing={3}>
+      <Masonry
+      breakpointCols={breakpoints}
+      className="my-masonry-grid"
+      columnClassName="my-masonry-grid_column">
         {blogs.map(blog => (
-          <Grid item xs={12} md={6} lg={4} key={blog.id}>
+          <div key={blog.id}>
             <BlogCard blog={blog} handleDelete={handleDelete} />
-          </Grid>
+          </div>
         ))}
-      </Grid>
+      </Masonry>
     </Container>    
   )
 }
