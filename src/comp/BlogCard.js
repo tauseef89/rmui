@@ -5,17 +5,24 @@ import CardContent from '@material-ui/core/CardContent'
 import IconButton from '@material-ui/core/IconButton'
 import Typography from '@material-ui/core/Typography'
 import DeleteOutlined from '@material-ui/icons/DeleteOutlined'
-
-
 import { makeStyles } from '@material-ui/core'
+import Avatar from '@material-ui/core/Avatar'
+import { yellow, green, pink, blue } from '@material-ui/core/colors'
 
 const useStyles = makeStyles({
-  test: {
-    border: (blog) => {
+  avatar: {
+    backgroundColor: (blog) => {
       if (blog.category == 'work') {
-        return '1px solid red'
+        return yellow[700]
       }
-    }
+      if (blog.category == 'food') {
+        return green[500]
+      }
+      if (blog.category == 'it') {
+        return pink[500]
+      }
+      return blue[500]
+    },
   }
 })
 
@@ -25,6 +32,10 @@ export default function BlogCard({ blog, handleDelete }) {
     <div>
       <Card elevation={1} className={classes.test}>
         <CardHeader
+        avatar={
+          <Avatar className={classes.avatar}>
+            {blog.category[0].toUpperCase()}
+          </Avatar>}
           action={
             <IconButton onClick={() => handleDelete(blog.id)}>
               <DeleteOutlined />
